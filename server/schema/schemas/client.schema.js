@@ -4,7 +4,7 @@ import { owners } from "../../data";
 const OwnerType = new GraphQLObjectType({
   name: "Owner",
   fields: () => ({
-    id: { type: GraphQLID },
+    _id: { type: GraphQLID },
     name: { type: GraphQLString },
     email: { type: GraphQLString },
   }),

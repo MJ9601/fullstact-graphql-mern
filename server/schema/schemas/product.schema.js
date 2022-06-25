@@ -8,31 +8,25 @@ import {
   GraphQLString,
 } from "graphql";
 import OwnerType from "./client.schema";
+import { findUser } from "../../services/client.service";
 
 const ProductType = new GraphQLObjectType({
   name: "Product",
   fields: () => ({
-    id: { type: GraphQLID },
+    _id: { type: GraphQLID },
     title: { type: GraphQLString },
     price: { type: GraphQLFloat },
     description: { type: GraphQLString },
-    category: { type: GraphQLString },
+    status: { type: GraphQLString },
     image: { type: GraphQLString },
-    owner: {
+    client: {
       type: OwnerType,
       resolve(parent, arge) {
-        return owners.find((owner) => owner.id === parent.owner);
+        return findUser({ _id: String(parent.owner) });
       },
     },
   }),
 });
 
-const ProductRatingType = new GraphQLObjectType({
-  name: "Rating",
-  fields: () => ({
-    rate: { type: GraphQLFloat },
-    count: { type: GraphQLInt },
-  }),
-});
 
 export default ProductType;
