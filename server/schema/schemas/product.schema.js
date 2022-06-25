@@ -1,4 +1,4 @@
-import { owners, products } from "../data";
+import { owners, products } from "../../data";
 import {
   GraphQLFloat,
   GraphQLID,
@@ -24,6 +24,14 @@ const ProductType = new GraphQLObjectType({
         return owners.find((owner) => owner.id === parent.owner);
       },
     },
+  }),
+});
+
+const ProductRatingType = new GraphQLObjectType({
+  name: "Rating",
+  fields: () => ({
+    rate: { type: GraphQLFloat },
+    count: { type: GraphQLInt },
   }),
 });
 

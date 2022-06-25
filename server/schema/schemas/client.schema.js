@@ -1,5 +1,5 @@
 import { GraphQLID, GraphQLObjectType, GraphQLString } from "graphql";
-import { owners } from "../data";
+import { owners } from "../../data";
 
 const OwnerType = new GraphQLObjectType({
   name: "Owner",

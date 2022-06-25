@@ -4,9 +4,11 @@ import {
   GraphQLObjectType,
   GraphQLSchema,
 } from "graphql";
-import OwnerType from "./client.schema";
+import OwnerType from "./schemas/client.schema";
 import { owners, products } from "../data";
-import ProductType from "./product.schema";
+import ProductType from "./schemas/product.schema";
+import { findAllUser, findUser } from "../services/client.service";
+import { findAllProducts, findProduct } from "../services/product.service";
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -15,26 +17,26 @@ const RootQuery = new GraphQLObjectType({
       type: OwnerType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return owners.find((owner) => owner.id == args.id);
+        return findUser({ _id: String(args.id) });
       },
     },
     owners: {
       type: new GraphQLList(OwnerType),
       resolve(parent, args) {
-        return owners;
+        return findAllUser();
       },
     },
     products: {
       type: new GraphQLList(ProductType),
       resolve(parent, args) {
-        return products;
+        return findAllProducts();
       },
     },
     product: {
       type: ProductType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return products.find((product) => product.id == args.id);
+        return findProduct({ _id: String(args.id) });
       },
     },
   },

@@ -1,7 +1,9 @@
 import express from "express";
 import "dotenv/config";
 import { graphqlHTTP } from "express-graphql";
-import schema from "./schema/rootQuery.schema";
+import schema from "./schema/root.schema";
+import logger from "./utils/logger";
+import dbConnect from "./utils/connection.db";
 
 const app = express();
 
@@ -15,4 +17,8 @@ app.use(
   })
 );
 
-app.listen(port, () => console.log(`Server is running on PORT ${port}`));
+app.listen(port, async () => {
+  logger.info(`Server is running on PORT ${port}`);
+  await dbConnect();
+});
+
