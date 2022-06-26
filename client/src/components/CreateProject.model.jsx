@@ -11,29 +11,21 @@ const CreateProject = () => {
         <form className="model-form">
           <input
             type="text"
-            name=""
-            id=""
             placeholder="Title"
             className="model-input"
           />
           <input
             type="text"
-            name=""
-            id=""
             placeholder="Price"
             className="model-input"
           />
           <input
             type="text"
-            name=""
-            id=""
             placeholder="Image url"
             className="model-input"
           />
           <textarea
             type="text"
-            name=""
-            id=""
             placeholder="Description"
             className="model-input"
           />

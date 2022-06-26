@@ -1,6 +1,11 @@
+import { useMutation } from "@apollo/client";
 import { TrashIcon } from "@heroicons/react/solid";
+import { DEL_PRODUCT } from "../utils/graphql/mutations.graphql";
 
 const ProductRow = ({ product }) => {
+  const [delProduct] = useMutation(DEL_PRODUCT, {
+    variables: { id: product._id },
+  });
   return (
     <div className="rounded-sm ring-1 bg-white ring-gray-300 py-3 px-5 max-w-[250px] relative h-[500px]">
       <img src={product.image} alt="" className="max-w-[200px] mb-4" />
@@ -13,7 +18,7 @@ const ProductRow = ({ product }) => {
       </p>
       <div className="flex absolute bottom-1 left-2 gap-2">
         <button className="button">Update Product</button>
-        <button>
+        <button onClick={delProduct}>
           <TrashIcon className="delete-button" />
         </button>
       </div>

@@ -11,7 +11,7 @@ export const DEL_CLIENT = gql`
 `;
 
 export const ADD_CLIENT = gql`
-  mutation addClient($name: String, $email: String!) {
+  mutation addClient($name: String!, $email: String!) {
     addClient(name: $name, email: $email) {
       _id
       name
@@ -21,12 +21,12 @@ export const ADD_CLIENT = gql`
 `;
 export const ADD_PRODUCT = gql`
   mutation addProduct(
-    $title: String
-    $price: Number
-    $desc: String
-    $image: String
-    $status: String
-    $client: ID
+    $title: String!
+    $price: Number!
+    $desc: String!
+    $image: String!
+    $status: String!
+    $client: ID!
   ) {
     addProduct(
       title: $title
@@ -59,12 +59,12 @@ export const DEL_PRODUCT = gql`
 
 export const UPDATE_PRODUCT = gql`
   mutation updateProduct(
-    $id: ID
-    $title: String
-    $price: Number
-    $desc: String
-    $image: String
-    $status: String
+    $id: ID!
+    $title: String!
+    $price: Number!
+    $desc: String!
+    $image: String!
+    $status: String!
   ) {
     updateProduct(
       _id: $id
