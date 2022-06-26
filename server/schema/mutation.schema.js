@@ -83,7 +83,8 @@ const mutation = new GraphQLObjectType({
       type: ProductType,
       args: {
         _id: { type: new GraphQLNonNull(GraphQLID) },
-        name: { type: GraphQLString },
+        title: { type: GraphQLString },
+        price: { type: GraphQLFloat },
         image: { type: GraphQLString },
         description: { type: GraphQLString },
         status: {
@@ -107,6 +108,7 @@ const mutation = new GraphQLObjectType({
               description: args.description,
               image: args.image,
               status: args.status,
+              price: args.price,
             },
           },
           { new: true }

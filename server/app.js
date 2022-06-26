@@ -4,8 +4,10 @@ import { graphqlHTTP } from "express-graphql";
 import schema from "./schema/root.schema";
 import logger from "./utils/logger";
 import dbConnect from "./utils/connection.db";
+import cors from "cors";
 
 const app = express();
+app.use(cors());
 
 const port = process.env.PORT || 8080;
 

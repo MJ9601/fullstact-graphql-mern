@@ -7,14 +7,14 @@ import { findAllProducts, findProduct } from "../services/product.service";
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
-    owner: {
+    client: {
       type: OwnerType,
-      args: { id: { type: GraphQLID } },
+      args: { _id: { type: GraphQLID } },
       resolve(parent, args) {
-        return findUser({ _id: String(args.id) });
+        return findUser({ _id: String(args._id) });
       },
     },
-    owners: {
+    clients: {
       type: new GraphQLList(OwnerType),
       resolve(parent, args) {
         return findAllUser();
@@ -28,9 +28,9 @@ const RootQuery = new GraphQLObjectType({
     },
     product: {
       type: ProductType,
-      args: { id: { type: GraphQLID } },
+      args: { _id: { type: GraphQLID } },
       resolve(parent, args) {
-        return findProduct({ _id: String(args.id) });
+        return findProduct({ _id: String(args._id) });
       },
     },
   },

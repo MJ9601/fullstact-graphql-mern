@@ -22,7 +22,7 @@ const ProductType = new GraphQLObjectType({
     client: {
       type: OwnerType,
       resolve(parent, arge) {
-        return findUser({ _id: String(parent.owner) });
+        return findUser({ _id: String(parent.client) });
       },
     },
   }),
