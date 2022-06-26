@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .button {
+    @apply bg-blue-500 rounded-sm px-3 pt-[3px] pb-1 text-white text-center hover:bg-blue-300 hover:text-blue-700 transition-all duration-150 cursor-pointer hover:ring-2 hover:ring-blue-700;
+  }
+  .delete-button {
+    @apply h-8 text-red-600 bg-gray-300 py-[3px] px-[2px] rounded-sm  hover:ring-red-700 hover:ring-2 transition-all duration-300 cursor-pointer;
+  }
+  .model-bg {
+    @apply w-[100%] h-[100vh] absolute top-0 left-0 bg-[rgba(0,0,0,.7)] z-20 grid place-items-center;
+  }
+  .model-body {
+    @apply rounded-md py-3 px-2 bg-white ring-1 ring-black min-w-[350px];
+  }
+  .model-header {
+    @apply border-b-2 pb-1 flex justify-between;
+  }
+  .model-input {
+    @apply bg-gray-200 px-2 py-1 rounded-sm outline-none;
+  }
+  .model-form {
+    @apply py-2 flex flex-col gap-4 px-3;
+  }
+  .model-headline {
+    @apply text-lg font-[500] ml-2 font-sans;
+  }
+  .model-close {
+    @apply h-6 cursor-pointer hover:text-red-600;
+  }
+}

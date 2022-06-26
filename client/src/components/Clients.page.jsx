@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { GET_CLIENTS } from "../utils/graphql/queries.graphql";
-import ClientRow from "./ClientRow";
+import ClientRow from "./Row.Client";
 
 const Client = () => {
   const { loading, error, data } = useQuery(GET_CLIENTS);
