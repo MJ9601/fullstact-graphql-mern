@@ -1,8 +1,10 @@
 import { useMutation } from "@apollo/client";
 import { TrashIcon } from "@heroicons/react/solid";
+import { useAppState } from "../context/StateProvider";
 import { DEL_PRODUCT } from "../utils/graphql/mutations.graphql";
 
 const ProductRow = ({ product }) => {
+  const [{}, dispatch] = useAppState();
   const [delProduct] = useMutation(DEL_PRODUCT, {
     variables: { id: product._id },
   });
@@ -17,7 +19,17 @@ const ProductRow = ({ product }) => {
         {product.description}
       </p>
       <div className="flex absolute bottom-1 left-2 gap-2">
-        <button className="button">Update Product</button>
+        <button
+          className="button"
+          onClick={() =>
+            dispatch({
+              type: "SET_CURRENT_PRODUCT",
+              product,
+            })
+          }
+        >
+          Update Product
+        </button>
         <button onClick={delProduct}>
           <TrashIcon className="delete-button" />
         </button>

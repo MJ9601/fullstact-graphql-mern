@@ -12,7 +12,7 @@ const CreateUser = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (email === "" && name === "") return alert("The Field is required!");
+    if (email === "" || name === "") return alert("The Field is required!");
     addClient(email, name);
 
     setEmail("");

@@ -1,9 +1,11 @@
 import { useMutation } from "@apollo/client";
 import { TrashIcon } from "@heroicons/react/solid";
+import { useAppState } from "../context/StateProvider";
 import { DEL_CLIENT } from "../utils/graphql/mutations.graphql";
 import { GET_CLIENTS } from "../utils/graphql/queries.graphql";
 
 const ClientRow = ({ client }) => {
+  const [{}, dispatch] = useAppState();
   const [deleteClient] = useMutation(DEL_CLIENT, {
     variables: {
       id: client._id,
@@ -26,7 +28,17 @@ const ClientRow = ({ client }) => {
         <div className="text-slate-500 text-sm">{client.email}</div>
       </div>
       <div className="flex justify-right items-center gap-4">
-        <button className="button">More Details</button>
+        <button
+          className="button"
+          onClick={() =>
+            dispatch({
+              type: "SET_CURRENT_USER",
+              client: client._id,
+            })
+          }
+        >
+          More Details
+        </button>
         <button onClick={deleteClient}>
           <TrashIcon className="delete-button" />
         </button>

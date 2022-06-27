@@ -6,6 +6,7 @@ import CreateUser from "./components/CreateUser.model";
 import CreateProject from "./components/CreateProject.model";
 import UpdateProduct from "./components/UpdateProject.model";
 import UserPage from "./components/User.page";
+import { useAppState } from "./context/StateProvider";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -31,16 +32,24 @@ const client = new ApolloClient({
   cache,
 });
 function App() {
+  const [
+    { createProduct, currentProduct, createUser, currentUser, displayUsers },
+  ] = useAppState();
+  console.log(currentProduct);
   return (
     <div className="relative">
       <ApolloProvider client={client}>
         <Header />
-        {/* <Client /> */}
-        {/* <Products /> */}
-        {/* <CreateUser /> */}
-        {/* <CreateProject /> */}
-        {/* <UpdateProduct /> */}
-        <UserPage />
+        {createUser && <CreateUser />}
+        {createProduct && <CreateProject />}
+        {currentProduct && <UpdateProduct />}
+        <>
+          {currentUser ? (
+            <UserPage />
+          ) : (
+            <>{displayUsers ? <Client /> : <Products />}</>
+          )}
+        </>
       </ApolloProvider>
     </div>
   );

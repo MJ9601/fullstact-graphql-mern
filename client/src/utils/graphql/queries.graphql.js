@@ -52,7 +52,7 @@ export const GET_PRODUCT_BY_ID = gql`
 `;
 
 export const FILTER_PRODUCTS = gql`
-  query filterProducts($client: ID!) {
+  query FilterProducts($client: ID!) {
     filterProducts(client: $client) {
       title
       price

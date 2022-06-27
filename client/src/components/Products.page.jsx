@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { GET_PRODUCTS } from "../utils/graphql/queries.graphql";
 import ProductRow from "./Row.Product";
 
-const Products = ({ user }) => {
+const Products = () => {
   const { loading, error, data } = useQuery(GET_PRODUCTS);
   if (loading) return <div className="">loading ...</div>;
   if (error) return <div className="">something went wrong!</div>;
