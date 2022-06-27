@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useAppState } from "../context/StateProvider";
 import { useMutation } from "@apollo/client";
 import { UPDATE_PRODUCT } from "../utils/graphql/mutations.graphql";
+import { GET_PRODUCTS } from "../utils/graphql/queries.graphql";
 
 const UpdateProduct = () => {
   const [{ currentProduct }, dispatch] = useAppState();
@@ -13,12 +14,13 @@ const UpdateProduct = () => {
   const [desc, setDesc] = useState(currentProduct.description);
   const [status, setStatus] = useState(currentProduct.status);
   const [updateProduct] = useMutation(UPDATE_PRODUCT, {
-    variables: { id, title, price, image, desc, image, status },
+    variables: { id, title, price, image, desc, status },
+    refetchQueries: [{ query: GET_PRODUCTS }],
   });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    updateProduct(id, title, price, status, image, desc);
+    updateProduct(id, title, Number(price), image, desc, image);
     dispatch({ type: "SET_CURRENT_PRODUCT", product: null });
   };
   return (
@@ -69,7 +71,7 @@ const UpdateProduct = () => {
             onChange={(e) => setDesc(e.target.value)}
           />
           <select
-            defaultValue={status}
+            value={status}
             onChange={(e) => setStatus(e.target.value)}
             className="model-input"
           >

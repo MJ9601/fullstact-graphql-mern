@@ -3,29 +3,33 @@ import { XIcon } from "@heroicons/react/solid";
 import { useState } from "react";
 import { useAppState } from "../context/StateProvider";
 import { ADD_PRODUCT } from "../utils/graphql/mutations.graphql";
+import { GET_PRODUCTS } from "../utils/graphql/queries.graphql";
 
 const CreateProject = () => {
-  const [{}, dispatch] = useAppState();
+  const [{ currentUser: client }, dispatch] = useAppState();
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [desc, setDesc] = useState("");
   const [image, setImage] = useState("");
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("NotPublished");
   const [createProduct] = useMutation(ADD_PRODUCT, {
-    variables: { title, price, desc, image, status },
+    variables: { title, price, desc, image, status, client },
+    refetchQueries: [{ query: GET_PRODUCTS }],
   });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (title !== "" || price !== "" || desc !== "")
+    if (title == "" || price == "" || desc == "")
       return alert("Tile, price and description fields are required!");
-    createProduct(title, price, desc, image !== "" && image, status);
+
+    console.log({ title, price, desc, image, status, client });
+    createProduct(title, Number(price), desc, image, status, client);
 
     setTitle("");
     setPrice("");
     setDesc("");
     setImage("");
-    setStatus("");
+    setStatus("NotPublished");
     dispatch({
       type: "TOGGLE_CREATE_PRODUCT",
     });

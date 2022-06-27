@@ -24,7 +24,7 @@ export const ADD_PRODUCT = gql`
     $title: String!
     $price: Number!
     $desc: String!
-    $image: String!
+    $image: String
     $status: String!
     $client: ID!
   ) {

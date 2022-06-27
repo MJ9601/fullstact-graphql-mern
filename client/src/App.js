@@ -35,7 +35,6 @@ function App() {
   const [
     { createProduct, currentProduct, createUser, currentUser, displayUsers },
   ] = useAppState();
-  console.log(currentProduct);
   return (
     <div className="relative">
       <ApolloProvider client={client}>

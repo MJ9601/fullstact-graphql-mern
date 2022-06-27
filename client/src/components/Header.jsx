@@ -1,7 +1,7 @@
 import { useAppState } from "../context/StateProvider";
 import Logo from "../utils/assets/logo.png";
 const Header = () => {
-  const [{ displayUsers }, dispatch] = useAppState();
+  const [{ displayUsers, currentUser }, dispatch] = useAppState();
   return (
     <>
       <div className="px-3 bg-slate-100 flex flex-row items-center justify-between">
@@ -17,6 +17,22 @@ const Header = () => {
             {displayUsers ? "Products" : "Clients"}
           </button>
         </div>
+      </div>
+      <div className="w-[100%] px-4 pt-3 pb-1 flex justify-end items-center gap-2 border-b-2 mb-2">
+        <button
+          className="button"
+          onClick={() => dispatch({ type: "TOGGLE_CREATE_USER" })}
+        >
+          Create Client
+        </button>
+        {currentUser && (
+          <button
+            className="button"
+            onClick={() => dispatch({ type: "TOGGLE_CREATE_PRODUCT" })}
+          >
+            Create Product
+          </button>
+        )}
       </div>
     </>
   );
