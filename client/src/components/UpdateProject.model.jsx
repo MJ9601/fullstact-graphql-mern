@@ -1,14 +1,26 @@
 import { XIcon } from "@heroicons/react/solid";
 import { useState } from "react";
 import { useAppState } from "../context/StateProvider";
+import { useMutation } from "@apollo/client";
+import { UPDATE_PRODUCT } from "../utils/graphql/mutations.graphql";
 
 const UpdateProduct = () => {
   const [{ currentProduct }, dispatch] = useAppState();
+  const id = currentProduct._id;
   const [title, setTitle] = useState(currentProduct.title);
   const [price, setPrice] = useState(currentProduct.price);
   const [image, setImage] = useState(currentProduct.image);
   const [desc, setDesc] = useState(currentProduct.description);
   const [status, setStatus] = useState(currentProduct.status);
+  const [updateProduct] = useMutation(UPDATE_PRODUCT, {
+    variables: { id, title, price, image, desc, image, status },
+  });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    updateProduct(id, title, price, status, image, desc);
+    dispatch({ type: "SET_CURRENT_PRODUCT", product: null });
+  };
   return (
     <div className="model-bg">
       <div className="model-body">
@@ -24,7 +36,7 @@ const UpdateProduct = () => {
             }
           />
         </div>
-        <form className="model-form">
+        <form className="model-form" onSubmit={onSubmit}>
           <input type="hidden" value={currentProduct._id} />
 
           <input

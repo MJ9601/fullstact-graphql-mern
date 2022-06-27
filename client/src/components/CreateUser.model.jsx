@@ -1,9 +1,11 @@
 import { useMutation } from "@apollo/client";
 import { XIcon } from "@heroicons/react/solid";
 import { useState } from "react";
+import { useAppState } from "../context/StateProvider";
 import { ADD_CLIENT } from "../utils/graphql/mutations.graphql";
 
 const CreateUser = () => {
+  const [{}, dispatch] = useAppState();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [addClient] = useMutation(ADD_CLIENT, {
@@ -17,13 +19,23 @@ const CreateUser = () => {
 
     setEmail("");
     setName("");
+    dispatch({
+      type: "TOGGLE_CREATE_USER",
+    });
   };
   return (
     <div className="model-bg">
       <div className="model-body">
         <div className="model-header">
           <h3 className="model-headline">Create Client</h3>
-          <XIcon className="model-close" />
+          <XIcon
+            className="model-close"
+            onClick={() =>
+              dispatch({
+                type: "TOGGLE_CREATE_USER",
+              })
+            }
+          />
         </div>
         <form className="model-form" onSubmit={onSubmit}>
           <input
